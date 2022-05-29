@@ -15,9 +15,9 @@ def cryptodata(request):
 
 def index(request):
 
-    bitcoins = CryptoPriceHistory.objects.filter(currency='bitcoin')
+    bitcoins = CryptoPriceHistory.objects.filter(currency='bitcoin').order_by('-price_updated_at')
 
-    all_coins = bitcoins.values('currency','price_inr','price_updated_at')
+    all_coins = bitcoins.values('currency','price_inr','price_updated_at')[:10:1]
    # context = [{'currency':bitcoin,'prices':prices,'time_update':time_update}]
     print(all_coins)
 

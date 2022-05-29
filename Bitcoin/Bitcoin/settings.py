@@ -39,9 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_crontab',
+    'rest_framework',
     'crypto',
-
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 10,
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

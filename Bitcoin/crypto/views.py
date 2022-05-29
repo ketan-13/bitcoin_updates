@@ -1,6 +1,11 @@
 from django.shortcuts import render
-from .models import Item,CryptoPriceHistory
+from django.contrib.auth.models import User
+from rest_framework import viewsets
 import requests
+
+from .serializers import CryptoPriceHistorySerializer
+from .models import CryptoPriceHistory
+
 
 # Create your views here.
 def cryptodata(request):
@@ -13,14 +18,17 @@ def cryptodata(request):
 
     return render(request, 'coins/crypto.html', {"all_coins": all_coins})
 
+
 def index(request):
 
     bitcoins = CryptoPriceHistory.objects.filter(currency='bitcoin').order_by('-price_updated_at')
 
     all_coins = bitcoins.values('currency','price_inr','price_updated_at')[:10:1]
-   # context = [{'currency':bitcoin,'prices':prices,'time_update':time_update}]
     print(all_coins)
 
     return render(request, 'coins/crypto.html', {"all_coins": all_coins})
 
 
+class BitcoinViewSet(viewsets.ModelViewSet):
+    queryset = CryptoPriceHistory.objects.all().order_by('-price_updated_at')
+    serializer_class = CryptoPriceHistorySerializer

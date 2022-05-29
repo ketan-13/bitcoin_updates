@@ -127,5 +127,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRONJOBS = [
-    ('* * * * *', 'crypto.cron.fetch_price')
+    ('* * * * *', 'crypto.cron.update_bitcoin_price_in_db')
 ]

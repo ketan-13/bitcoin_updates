@@ -40,12 +40,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_crontab',
     'rest_framework',
+    'rest_framework.authtoken',
     'crypto',
 ]
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
 }
 
 MIDDLEWARE = [

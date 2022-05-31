@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+
 import requests
 
 from .serializers import CryptoPriceHistorySerializer
@@ -30,5 +32,7 @@ def index(request):
 
 
 class BitcoinViewSet(viewsets.ModelViewSet):
+    #permission_classes = (IsAuthenticated,)
+
     queryset = CryptoPriceHistory.objects.all().order_by('-price_updated_at')
     serializer_class = CryptoPriceHistorySerializer
